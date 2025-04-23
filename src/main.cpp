@@ -1,11 +1,10 @@
 #include "raylib.h"
 #include "raymath.h"
 
-#include "asteroid.h"
-#include "bullet.h"
+#include "asteroid.hpp"
+#include "bullet.hpp"
 
 #include <vector>
-#include <algorithm>
 
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 600

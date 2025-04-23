@@ -1,8 +1,8 @@
 GXX = g++
 SRC = $(wildcard ./src/*.cpp)
-CXXFLAGS = -I./include/
-LDFLAGS_WIN =  -L./lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
-LDFLAGS_LINUX = -L./lib/ -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+CXXFLAGS = -I./raylib/src
+LDFLAGS_WIN =  -L./raylib/src -lraylib -lopengl32 -lgdi32 -lwinmm
+LDFLAGS_LINUX = -L./raylib/src -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 
 WARNING_FLAGS = -Wpedantic -Wall -Wextra -Wconversion -Wsign-conversion -Werror
 
@@ -11,9 +11,9 @@ OUT_LINUX = app.out
 
 .PHONY: build_win build_linux run_win run_linux windows linux 
 
-#not needed cuz i dont pull raylib source
-#dependencies: 
-#	@cd ./lib/raylib/src && make PLATFORM=PLATFORM_DESKTOP
+dependencies: 
+	@git submodule update --init --recursive
+	@cd ./raylib/src && make PLATFORM=PLATFORM_DESKTOP
 
 build_win: 
 	@$(GXX) $(SRC) $(CXXFLAGS) $(LDFLAGS_WIN) -o $(OUT_WIN)
@@ -27,9 +27,9 @@ run_win: build_win
 run_linux: build_linux
 	@./$(OUT_LINUX)
 
-windows: run_win
+windows: dependencies run_win
 
-linux: run_linux
+linux: dependencies run_linux
 
 clean:
 	@rm -f $(OUT_WIN) $(OUT_LINUX)

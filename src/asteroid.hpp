@@ -1,6 +1,6 @@
 #include "raymath.h"
 #include "raylib.h"
-#include "bullet.h"
+#include "bullet.hpp"
 
 #include <iostream>
 
