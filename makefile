@@ -12,8 +12,6 @@ OUT_LINUX = app.out
 .PHONY: build_win build_linux run_win run_linux windows linux 
 
 dependencies: 
-	@rmdir /s /q .\raylib\ 
-	@git clone --recurse-submodules https://github.com/raysan5/raylib.git
 	@git submodule update --init --recursive
 	@cd ./raylib/src && make PLATFORM=PLATFORM_DESKTOP
 
