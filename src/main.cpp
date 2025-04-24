@@ -1,21 +1,11 @@
-#include "raylib.h"
-#include "raymath.h"
-
-#include "asteroid.hpp"
-#include "bullet.hpp"
-
-#include <vector>
-
-#define SCREENWIDTH 800
-#define SCREENHEIGHT 600
+#include "include.hpp"
 
 inline float clamp_rotation(float degree) noexcept;
-float clampToScreen(float value, float min, float max) noexcept;
+float clamp_screen(float value, float min, float max) noexcept;
 
 
 int main()
 {
-
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "Asteroid"); 
     //DisableCursor();
@@ -64,8 +54,8 @@ int main()
         
         deltaTime = GetFrameTime();
         //Make sure the ship stays on the screen 
-        destRec.x = clampToScreen(destRec.x, 0, static_cast<float>(SCREENWIDTH));
-        destRec.y = clampToScreen(destRec.y, 0, static_cast<float>(SCREENHEIGHT));
+        destRec.x = clamp_screen(destRec.x, 0, static_cast<float>(SCREENWIDTH));
+        destRec.y = clamp_screen(destRec.y, 0, static_cast<float>(SCREENHEIGHT));
 
         bulletCol = asteroidManager.Update(bullets);
 
@@ -159,7 +149,7 @@ int main()
 }
 
 //Makes the ship to stay inside and goes to the other side on the screen
-float clampToScreen(float value, float min, float max) noexcept {
+float clamp_screen(float value, float min, float max) noexcept {
     if(value < min)
         return value + max;
     if(value > max)

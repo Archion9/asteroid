@@ -1,7 +1,6 @@
-#include "raymath.h"
-
 #ifndef BULLET_H
 #define BULLET_H
+#include "include.hpp"
 
 struct Bullet
 {
